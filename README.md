@@ -94,14 +94,3 @@ make run
 La commande `make run` exécute `python3 backend/main.py`. L'interface sera ensuite accessible dans le navigateur à l'adresse locale affichée par le serveur (par exemple `http://localhost:8000`).
 
 Aucune installation de paquet n'est nécessaire.
-
-## 8. Répartition possible du travail (4 étudiants)
-
-| Étudiant | Responsabilité | Fichiers principaux |
-|---|---|---|
-| Étudiant 1 | Serveur HTTP et API (routes, réponses JSON, service des fichiers du frontend) | `backend/main.py` |
-| Étudiant 2 | Scan des dossiers, hachage SHA-256, détection des ajouts/modifications/suppressions | `backend/scanner.py` |
-| Étudiant 3 | Gestion des versions : délai de 5 s, création des snapshots, stockage JSON, restauration | `backend/versions.py`, `backend/storage.py` |
-| Étudiant 4 | Interface web : affichage des dossiers, de l'historique, exploration et restauration | `frontend/index.html`, `frontend/style.css`, `frontend/app.js` |
-
-Conseil : définir ensemble, dès le début, le format des métadonnées JSON et la liste des routes de l'API, afin que chacun puisse avancer en parallèle.
