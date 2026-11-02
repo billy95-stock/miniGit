@@ -46,7 +46,7 @@ Aucun framework (ni Flask, ni FastAPI) et aucune dépendance externe.
 ## 5. Architecture du projet
 
 ```text
-versionhub/
+miniGit/
 │
 ├── backend/
 │   ├── main.py        # Point d'entrée : lance le serveur HTTP et définit les routes de l'API
@@ -87,7 +87,7 @@ Navigateur (HTML/CSS/JS)  <──HTTP/JSON──>  main.py (http.server)
 Prérequis : Python 3 et `make`.
 
 ```bash
-cd versionhub
+cd miniGit
 make run
 ```
 
