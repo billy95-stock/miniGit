@@ -57,3 +57,23 @@ On utilise surtout la bibliothèque standard de Python donc presque rien a insta
 - shutil : pour copier les fichiers quand on sauvegarde ou qu'on restaure. Pour prendre moins de place on recopie pas les fichiers qui ont pas changé
 - time et threading : pour vérifier le dossier régulièrement et attendre un certain temps sans modification avant de sauvegarder. La fréquence et le temps d'attente sont paramétrables dans la config, la durée par défaut est encore a décider. On a regardé le module watchdog mais il faut l'installer et une simple boucle suffit.
 - http.server : pour le serveur web. Il est pas fait pour un vrai site en ligne mais pour un petit outil en local ça suffit, Flask est plus pratique mais faut l'installer
+- zipfile (optionnel) : pour télécharger une version en .zip
+- difflib (optionnel) : pour afficher les différences entre deux fichiers. Ca marche que pour les fichiers texte, pas pour les images par exemple.
+- fnmatch (optionnel) : pour reconnaitre les fichiers a ignorer avec des règles comme *.tmp
+- logging (optionnel) : pour écrire le journal du programme dans un fichier, c'est mieux que des print car on peut choisir le niveau (info, erreur)
+- zlib (optionnel) : pour compresser les fichiers sauvegardés. Ca sert pas a grand chose sur des fichiers deja compressés comme les images ou les .zip
+- argparse (optionnel) : pour lancer des commandes dans le terminal, par exemple python main.py save ou python main.py restore 3. Il crée aussi une aide tout seul avec --help, c'est pratique pour tester le programme avant que l'interface web soit prête.
+
+On utilise aussi deux modules externes pour les fonctionnalités en plus :
+
+- plyer (optionnel) : pour les notifications sur Windows et Linux. Il s'installe avec pip et il est simple a utiliser mais il est moins mis a jour que les autres, et sous Linux il faut que le système gère les notifications
+- Pygments (optionnel) : pour colorer le code. Il s'installe avec pip, il est très utilisé, bien maintenu et bien documenté. Il reconnait des centaines de langages mais il sert que pour les fichiers de code ou de texte.
+
+watchdog et Flask s'installent facilement avec pip, ils sont bien maintenus avec une grosse communauté et une bonne doc. On les garde de côté si la bibliothèque standard suffit pas.
+
+## Lancement
+
+```
+pip install -r requirements.txt
+make run
+```
