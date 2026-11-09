@@ -94,3 +94,28 @@ make run
 La commande `make run` exécute `python3 backend/main.py`. L'interface sera ensuite accessible dans le navigateur à l'adresse locale affichée par le serveur (par exemple `http://localhost:8000`).
 
 Aucune installation de paquet n'est nécessaire.
+
+
+
+
+
+
+# Partie 1 : noyau minimal et fonctionnalités
+
+
+## celles qui sont indispensables pour avoir un noyau minimal :
+
+pathlib	: Parcourir les dossiers et manipuler les chemins
+json : Enregistrer les dossiers surveillés et les métadonnées des versions
+hashlib	: Calculer le SHA-256 pour savoir si un fichier a changé
+shutil : Copier les fichiers dans history/ et les recopier lors d’une restauration
+
+## celles qui s'ajoutent pour compléter ce noyau :
+
+zipfile : télécharger une version sous forme de .zip.
+
+## les dépendances entre les fonctionnalités
+
+## leurs priorités
+
+# Partie 2 : identifier les briques logicielles utilisables
