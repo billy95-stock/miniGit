@@ -46,3 +46,14 @@ Fonctionnalités en plus :
     - dépend de 4, 5 et 6
 
 Priorités : d'abord 1 à 6, ensuite 7 et 8 et apres 9 à 16 si on a le temps.
+
+## Partie 2 : modules
+
+On utilise surtout la bibliothèque standard de Python donc presque rien a installer. Ces modules marchent sous Windows et Linux, ils sont maintenus par l'équipe officielle de Python et la documentation est complète sur docs.python.org
+
+- json : pour la configuration et l'historique des versions.
+- pathlib : pour parcourir les dossiers et lister les fichiers d'une ancienne version
+- hashlib : pour savoir si un fichier a changé grace a son empreinte SHA-256. C'est plus fiable que la date de modification qui peut changer alors que le contenu est le même. Par contre il dit juste si le fichier a changé mais pas ce qui a changé (c'est difflib qui fait ca).
+- shutil : pour copier les fichiers quand on sauvegarde ou qu'on restaure. Pour prendre moins de place on recopie pas les fichiers qui ont pas changé
+- time et threading : pour vérifier le dossier régulièrement et attendre un certain temps sans modification avant de sauvegarder. La fréquence et le temps d'attente sont paramétrables dans la config, la durée par défaut est encore a décider. On a regardé le module watchdog mais il faut l'installer et une simple boucle suffit.
+- http.server : pour le serveur web. Il est pas fait pour un vrai site en ligne mais pour un petit outil en local ça suffit, Flask est plus pratique mais faut l'installer
