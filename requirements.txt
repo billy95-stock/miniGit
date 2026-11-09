@@ -1,1 +1,2 @@
-# Aucune dépendance externe : le projet utilise uniquement la bibliothèque standard de Python.
+plyer
+Pygments
