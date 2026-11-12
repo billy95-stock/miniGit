@@ -1,0 +1,8 @@
+{
+    "watched_folders": ["dossier_surveille"],
+    "history_dir": "history",
+    "check_interval": 10,
+    "stabilization_delay": 60,
+    "host": "127.0.0.1",
+    "port": 8000
+}
