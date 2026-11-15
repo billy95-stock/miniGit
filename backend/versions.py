@@ -35,3 +35,14 @@ def create_version(history, state, manual=False) :
 	}
 	history.append(version)
 	return version
+
+def list_versions(history) :
+	result = []
+	for version in history :
+		result.append({
+			"number": version["number"],
+			"date": version["date"],
+			"type": version["type"],
+			"changes": version["changes"],
+		})
+	return result
