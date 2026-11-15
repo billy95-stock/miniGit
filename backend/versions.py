@@ -1,6 +1,7 @@
 """Création, listing et restauration des versions (snapshots)"""
 
 from datetime import datetime
+import time
 
 def compare(old, new) :
 	added = set(new) - set(old)
@@ -46,3 +47,18 @@ def list_versions(history) :
 			"changes": version["changes"],
 		})
 	return result
+
+def watch_loop(history, config, scan) :
+	folder = config["watched_folders"][0]
+	interval = config["check_interval"]
+	delay = config["stabilization_delay"]
+	last_seen = scan(folder)
+	last_change = time.time()
+	while True :
+		time.sleep(interval)
+		state = scan(folder)
+		if state != last_seen :
+			last_seen = state
+			last_change = time.time()
+		elif time.time() - last_change >= delay :
+			create_version(history, state)
