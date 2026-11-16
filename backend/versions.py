@@ -68,3 +68,9 @@ def watch_loop(history, config, scan) :
 			last_change = time.time()
 		elif time.time() - last_change >= delay :
 			create_version(history, state)
+
+#fonction pour sauvgarder manuellement
+def save_now(history, config, scan) :
+	folder = config["watched_folders"][0]
+	state = scan(folder)
+	return create_version(history, state, manual=True)
