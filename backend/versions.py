@@ -3,6 +3,7 @@
 from datetime import datetime
 import time
 
+#fonction qui compare la dernier version dans history et celle de actuelle de notre PC
 def compare(old, new) :
 	added = set(new) - set(old)
 	deleted = set(old) - set(new)
@@ -17,6 +18,7 @@ def compare(old, new) :
 		"deleted" : sorted(deleted),
 	}
 
+#fonction qui ajoute un version dans history
 def create_version(history, state, manual=False) :
 	if history :
 		last_state = history[-1]["files"]
@@ -37,6 +39,7 @@ def create_version(history, state, manual=False) :
 	history.append(version)
 	return version
 
+#fonction qui liste dans result un history
 def list_versions(history) :
 	result = []
 	for version in history :
@@ -48,6 +51,9 @@ def list_versions(history) :
 		})
 	return result
 
+#fonction qui regarde toute les check_interval
+#qui fait creer une sauvegarde dans history quand on a fait plus aucune
+#modification au bout de stabilization_delay
 def watch_loop(history, config, scan) :
 	folder = config["watched_folders"][0]
 	interval = config["check_interval"]
