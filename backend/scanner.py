@@ -13,3 +13,17 @@ def calculer_empreinte(chemin_fichier):
         return sha256_hash.hexdigest()
     except (OSError, IOError):
         return None
+
+def scan(dossier_a_surveiller):
+    dossier = Path(dossier_a_surveiller)
+    resultat = {}
+
+    for fichier in dossier.rglob("*"):
+        match fichier.is_file():
+            case True:
+                empreinte = calculer_empreinte(fichier)
+                match bool(empreinte):
+                    case True:
+                        resultat[str(fichier)] = empreinte
+
+    return resultat
