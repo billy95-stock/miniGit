@@ -1,1 +1,92 @@
-<!-- Structure de l'interface web VersionHub. À implémenter. -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>miniGit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- En-tête : nom de l'appli + dossier surveillé -->
+    <header class="header">
+        <h1>miniGit</h1>
+        <p class="header-folder">
+            Dossier surveillé : <strong id="folder-name">chargement…</strong>
+        </p>
+    </header>
+
+    <!-- Message de retour pour l'utilisateur (succès / erreur), caché par défaut -->
+    <div id="message" class="message" hidden></div>
+
+    <main class="layout">
+
+        <!-- ===== Colonne de gauche : état actuel + paramètres ===== -->
+        <section class="column">
+
+            <div class="card">
+                <h2>Changements en attente</h2>
+                <ul id="pending-list" class="change-list">
+                    <li class="empty">Chargement…</li>
+                </ul>
+                <button id="save-button" class="button button-primary">
+                    Sauvegarder maintenant
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>Paramètres</h2>
+                <form id="config-form" class="form">
+                    <label for="check-interval">Vérification toutes les (secondes)</label>
+                    <input type="number" id="check-interval" min="1" required>
+
+                    <label for="stabilization-delay">Sauvegarde auto après (secondes sans modification)</label>
+                    <input type="number" id="stabilization-delay" min="1" required>
+
+                    <button type="submit" class="button">Enregistrer</button>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- ===== Colonne du milieu : historique des versions ===== -->
+        <section class="column">
+            <div class="card">
+                <h2>Historique</h2>
+                <ul id="version-list" class="version-list">
+                    <li class="empty">Chargement…</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Colonne de droite : détail de la version choisie ===== -->
+        <section class="column">
+            <div class="card">
+                <h2 id="detail-title">Détail d'une version</h2>
+                <p id="detail-empty" class="empty">
+                    Clique sur une version de l'historique pour voir ses fichiers.
+                </p>
+
+                <!-- Caché tant qu'aucune version n'est choisie -->
+                <div id="detail-content" hidden>
+                    <h3>Fichiers</h3>
+                    <ul id="file-list" class="file-list"></ul>
+
+                    <h3 id="file-title" hidden></h3>
+                    <pre id="file-viewer" class="file-viewer" hidden></pre>
+
+                    <h3>Restaurer cette version</h3>
+                    <form id="restore-form" class="form">
+                        <label for="restore-target">Dossier de destination (vide = dossier d'origine)</label>
+                        <input type="text" id="restore-target" placeholder="ex : restauration_v3">
+                        <button type="submit" class="button button-danger">Restaurer</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
