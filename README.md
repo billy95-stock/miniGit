@@ -77,3 +77,20 @@ watchdog et Flask s'installent facilement avec pip, ils sont bien maintenus avec
 pip install -r requirements.txt
 make run
 ```
+
+Puis ouvrir http://localhost:8080 dans le navigateur.
+
+## Configuration
+
+Les réglages sont dans `config.json` (le JSON n'accepte pas les commentaires, donc ils sont expliqués ici) :
+
+| Clé | Rôle |
+|---|---|
+| `watched_folders` | Liste des dossiers à surveiller |
+| `history_dir` | Dossier où sont rangées les sauvegardes |
+| `check_interval` | Secondes entre deux vérifications du dossier (défaut : 10) |
+| `stabilization_delay` | Secondes sans modification avant une sauvegarde auto (défaut : 60) |
+| `host` | Adresse du serveur (`127.0.0.1` = accessible seulement depuis son ordi) |
+| `port` | Port du serveur, la page est sur `http://localhost:<port>` |
+
+`check_interval` et `stabilization_delay` peuvent aussi être modifiés depuis l'interface web.
