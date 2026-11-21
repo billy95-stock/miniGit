@@ -1,299 +1,94 @@
-/* ==========================================================
-   Variables : toutes les couleurs sont définies ici une seule fois
-   ========================================================== */
-:root {
-    --bg: #f4f5f7;          /* fond de la page */
-    --card: #ffffff;        /* fond des cartes */
-    --text: #1f2328;        /* texte principal */
-    --muted: #6b7280;       /* texte secondaire (gris) */
-    --border: #d8dce1;      /* bordures */
-    --primary: #2563eb;     /* bleu : boutons principaux, sélection */
-    --added: #16a34a;       /* vert : fichier ajouté */
-    --modified: #d97706;    /* orange : fichier modifié */
-    --deleted: #dc2626;     /* rouge : fichier supprimé */
-    --code-bg: #f6f8fa;     /* fond de l'affichage d'un fichier */
-}
-
-/* Mode sombre automatique si l'ordi est en thème sombre */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #0f1115;
-        --card: #181b21;
-        --text: #e6e8eb;
-        --muted: #9aa1ab;
-        --border: #2c313a;
-        --primary: #4f8cff;
-        --added: #3fb950;
-        --modified: #e3a33a;
-        --deleted: #f26b6b;
-        --code-bg: #11141a;
-    }
-}
-
-/* ==========================================================
-   Base
-   ========================================================== */
-* {
-    box-sizing: border-box;   /* la taille inclut padding + bordure */
-}
-
+/* Page */
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
 }
 
-h1, h2, h3 {
-    margin: 0 0 12px;
+/* En-tête */
+header {
+    background: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
 }
 
-h2 { font-size: 1.1rem; }
-h3 { font-size: 0.95rem; margin-top: 20px; }
-
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 16px;
-}
-
-/* ==========================================================
-   En-tête
-   ========================================================== */
-.header {
-    padding: 20px 24px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-}
-
-.header-folder {
-    margin: 0;
-    color: var(--muted);
-}
-
-/* ==========================================================
-   Mise en page : 3 colonnes (1 seule sur petit écran)
-   ========================================================== */
-.layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.3fr;
-    gap: 20px;
-    padding: 24px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.column {
+/* Les 3 colonnes côte à côte (elles passent en dessous si l'écran est petit) */
+main {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 20px;
-    min-width: 0;   /* empêche le contenu long de déborder de la colonne */
-}
-
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-        padding: 16px;
-    }
-}
-
-/* ==========================================================
-   Cartes
-   ========================================================== */
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
     padding: 20px;
 }
 
+section {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Les blocs blancs */
+.card {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Textes "Chargement…", "Aucune version"… */
 .empty {
-    color: var(--muted);
+    color: gray;
     font-style: italic;
 }
 
-/* ==========================================================
-   Boutons
-   ========================================================== */
-.button {
-    padding: 8px 16px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--card);
-    color: var(--text);
-    font: inherit;
-    cursor: pointer;
-}
-
-.button:hover {
-    border-color: var(--primary);
-}
-
-.button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.button-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-}
-
-.button-danger {
-    border-color: var(--deleted);
-    color: var(--deleted);
-}
-
-/* ==========================================================
-   Formulaires
-   ========================================================== */
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form label {
-    font-size: 0.9rem;
-    color: var(--muted);
-}
-
-.form input {
-    padding: 8px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--bg);
-    color: var(--text);
-    font: inherit;
-}
-
-.form button {
-    align-self: flex-start;
-    margin-top: 4px;
-}
-
-/* ==========================================================
-   Listes de changements (ajouté / modifié / supprimé)
-   ========================================================== */
-.change-list li {
-    padding: 4px 0;
-    word-break: break-all;   /* coupe les chemins de fichiers trop longs */
-}
-
-/* Petite étiquette colorée devant chaque fichier : + ~ - */
-.tag {
-    display: inline-block;
-    width: 1.4em;
-    font-weight: bold;
-    font-family: monospace;
-}
-
-.added    .tag { color: var(--added); }
-.modified .tag { color: var(--modified); }
-.deleted  .tag { color: var(--deleted); }
-
-/* ==========================================================
-   Historique des versions
-   ========================================================== */
-.version-list li {
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-
-.version-list li:hover {
-    border-color: var(--primary);
-}
-
-/* La version actuellement choisie */
-.version-list li.selected {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 1px var(--primary);
-}
-
-/* Le message "Aucune version" ne doit pas avoir l'air cliquable */
-.version-list li.empty {
-    border: none;
+/* Listes sans puces */
+ul {
+    list-style: none;
     padding: 0;
-    cursor: default;
 }
 
-.version-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-}
+/* Couleurs des changements */
+.added    { color: green; }
+.modified { color: orange; }
+.deleted  { color: red; }
 
-.version-date,
-.version-summary {
-    color: var(--muted);
-    font-size: 0.85rem;
-}
-
-/* Badge "auto" / "manuel" */
-.badge {
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-}
-
-.badge-manuel {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-/* ==========================================================
-   Détail d'une version : fichiers + contenu
-   ========================================================== */
-.file-list li {
-    padding: 4px 8px;
-    border-radius: 4px;
+/* Versions de l'historique et fichiers : cliquables */
+#version-list li,
+#file-list li {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
-    font-family: monospace;
-    word-break: break-all;
 }
 
-.file-list li:hover,
-.file-list li.selected {
-    background: var(--bg);
+/* La version ou le fichier choisi */
+.selected {
+    background: #dde8ff;
 }
 
-.file-viewer {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 12px;
+/* Formulaires : un élément par ligne */
+label,
+input {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Contenu d'un fichier */
+pre {
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    padding: 10px;
     max-height: 400px;
-    overflow: auto;           /* barre de défilement si le fichier est long */
-    font-size: 0.85rem;
-    white-space: pre;
+    overflow: auto;
 }
 
-/* ==========================================================
-   Message de succès / erreur
-   ========================================================== */
-.message {
-    max-width: 1400px;
-    margin: 16px auto 0;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--primary);
-    background: var(--card);
+/* Message de succès / erreur */
+#message {
+    margin: 20px 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background: white;
 }
 
-.message.success { border-color: var(--added); }
-.message.error   { border-color: var(--deleted); color: var(--deleted); }
-
-/* Sur petit écran, le message garde une marge sur les côtés */
-@media (max-width: 1450px) {
-    .message { margin: 16px 24px 0; }
-}
-@media (max-width: 900px) {
-    .message { margin: 16px 16px 0; }
-}
+.success { border: 1px solid green; }
+.error   { border: 1px solid red; color: red; }
