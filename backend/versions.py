@@ -86,3 +86,8 @@ def restore(history, number, target, read_file) :
 		raise ValueError(f"Version {number} introuvable")
 	for path, sha in files.items() :
 		dest = Path(target) / path
+		if sha is None :
+			dest.mkdir(parents=True, exist_ok=True)
+		else :
+			dest.parent.mkdir(parents=True, exist_ok=True)
+			dest.write_bytes(read_file(sha))
