@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import time
+from pathlib import Path
 
 #fonction qui compare la dernier version dans history et celle de actuelle de notre PC
 def compare(old, new) :
@@ -77,9 +78,11 @@ def save_now(history, config, scan) :
 
 
 def restore(history, number, target, read_file) :
-    files = None
-    for version in history :
-            if version["number"] == number :
-                    files = version["files"]
-    if files is None :
-            raise ValueError(f"Version {number} introuvable")
+	files = None
+	for version in history :
+		if version["number"] == number :
+			files = version["files"]
+	if files is None :
+		raise ValueError(f"Version {number} introuvable")
+	for path, sha in files.items() :
+		dest = Path(target) / path
