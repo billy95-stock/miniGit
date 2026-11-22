@@ -77,6 +77,9 @@ def save_now(history, config, scan) :
 
 
 def restore(history, number, target, read_file) :
-        for version in history :
-                if version["number"] == number :
-                        files = version["files"]
+    files = None
+    for version in history :
+            if version["number"] == number :
+                    files = version["files"]
+    if files is None :
+            raise ValueError(f"Version {number} introuvable")
