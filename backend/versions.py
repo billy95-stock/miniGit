@@ -74,3 +74,9 @@ def save_now(history, config, scan) :
 	folder = config["watched_folders"][0]
 	state = scan(folder)
 	return create_version(history, state, manual=True)
+
+
+def restore(history, number, target, read_file) :
+        for version in history :
+                if version["number"] == number :
+                        files = version["files"]
