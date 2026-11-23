@@ -91,7 +91,6 @@ Les réglages sont dans `config.json` (le JSON n'accepte pas les commentaires, d
 ## Répartition des tache de chaque membre du groupe.
 
 Nous avons répartit les tache pour chaque partit de notre projet :
-
 Sami Hammouche s'occupe de versions.py du backend.
 Hamara Carama s'occupe de storage.py du backend.
 Azeddine Billail s'occupe du frontend et main.
