@@ -41,5 +41,5 @@ def save_metadata(version):
     fichier = snapshot_dir / "metadata.json"
 
     with open(fichier, "w", encoding="utf-8") as f:
-        json.dump(version, f, indent=4, ensure_ascii=False)v 
+        json.dump(version, f, indent=4, ensure_ascii=False)
     
