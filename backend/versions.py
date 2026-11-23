@@ -4,8 +4,14 @@ from datetime import datetime
 import time
 from pathlib import Path
 
-#fonction qui compare la dernier version dans history et celle de actuelle de notre PC
 def compare(old, new) :
+	"""compare deux états du dossier
+
+	>>> compare({"a.txt": "1"}, {"a.txt": "2"})
+	{'added': [], 'modified': ['a.txt'], 'deleted': []}
+	>>> compare({"a.txt": "1"}, {"a.txt": "1"})
+	{'added': [], 'modified': [], 'deleted': []}
+	"""
 	added = set(new) - set(old)
 	deleted = set(old) - set(new)
 	common = set(old) & set(new)
@@ -19,8 +25,14 @@ def compare(old, new) :
 		"deleted" : sorted(deleted),
 	}
 
-#fonction qui ajoute un version dans history
 def create_version(history, state, manual=False) :
+	"""ajoute une version dans history si quelque chose a changé
+
+	>>> create_version([], {"a.txt": "1"})["number"]
+	1
+	>>> print(create_version([{"files": {"a.txt": "1"}}], {"a.txt": "1"}))
+	None
+	"""
 	if history :
 		last_state = history[-1]["files"]
 	else :
@@ -40,8 +52,12 @@ def create_version(history, state, manual=False) :
 	history.append(version)
 	return version
 
-#fonction qui liste dans result un history
 def list_versions(history) :
+	"""recopie history sans les fichiers
+
+	>>> list_versions([])
+	[]
+	"""
 	result = []
 	for version in history :
 		result.append({
@@ -76,8 +92,14 @@ def save_now(history, config, scan) :
 	state = scan(folder)
 	return create_version(history, state, manual=True)
 
-#fonction qui permet de recuperer une version choisi
 def restore(history, number, target, read_file) :
+	"""remet une version dans le dossier target
+
+	>>> restore([], 99, "x", None)
+	Traceback (most recent call last):
+	    ...
+	ValueError: Version 99 introuvable
+	"""
 	files = None
 	for version in history :
 		if version["number"] == number :
