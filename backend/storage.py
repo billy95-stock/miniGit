@@ -42,4 +42,13 @@ def save_metadata(version):
 
     with open(fichier, "w", encoding="utf-8") as f:
         json.dump(version, f, indent=4, ensure_ascii=False)
+
+def load_metadata(number):
+    """Charge les informations d'une version depuis un fichier JSON."""
+
+    snapshot_dir = HISTORY_DIR / f"snapshot_{number:03d}"
+    fichier = snapshot_dir / "metadata.json"
+
+    with open(fichier, "r", encoding="utf-8") as f:
+        return json.load(f)
     
