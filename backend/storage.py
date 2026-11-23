@@ -1,5 +1,6 @@
 import shutil
 from pathlib import Path
+import json
 
 HISTORY_DIR = Path(__file__).resolve().parent.parent / "history"
 
@@ -33,4 +34,12 @@ def create_snapshot(number, source_dir, changes):
 
     return snapshot_dir
 
+def save_metadata(version):
+    """Enregistre les informations d'une version dans un fichier JSON."""
+
+    snapshot_dir = HISTORY_DIR / f"snapshot_{version['number']:03d}"
+    fichier = snapshot_dir / "metadata.json"
+
+    with open(fichier, "w", encoding="utf-8") as f:
+        json.dump(version, f, indent=4, ensure_ascii=False)v 
     
