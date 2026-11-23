@@ -76,7 +76,7 @@ def save_now(history, config, scan) :
 	state = scan(folder)
 	return create_version(history, state, manual=True)
 
-
+#fonction qui permet de recuperer une version choisi
 def restore(history, number, target, read_file) :
 	files = None
 	for version in history :
